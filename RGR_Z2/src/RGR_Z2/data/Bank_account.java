@@ -11,24 +11,19 @@ package RGR_Z2.data;
  */
 public class Bank_account {
 
-    private int invoice_amount;
+    private volatile int balans = 1000;
 
-    public Bank_account(int _invoice_amount) {
-        invoice_amount = _invoice_amount;
+    public int getBalans() {
+        return balans;
     }
 
-    public int Withdrawal(int WithSumm) {
-        int statys;
-
-        if (WithSumm < 10 || WithSumm > 50) {
-            return 1;
+    synchronized public boolean withdrawal(int WithSumm) {
+        if(balans>10 && WithSumm<50 && WithSumm>10 && balans > WithSumm){
+            balans -= WithSumm;
+            return true;
+        }else{
+            return false;
         }
-        if (invoice_amount < 10) {
-            return 2;
-        }
-
-        invoice_amount -= WithSumm;
-        return 0;
     }
 
 }
