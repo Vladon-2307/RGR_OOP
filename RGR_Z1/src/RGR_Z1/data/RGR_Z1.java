@@ -14,8 +14,8 @@ import java.util.Scanner;
  * @author vlado
  */
 public class RGR_Z1 {
-    
-    public static List<Integer> Spisoc(){
+
+    public static List<Integer> Spisoc() {
         List<Integer> spisoc = new ArrayList();
         spisoc.add(10);
         spisoc.add(100);
@@ -35,11 +35,12 @@ public class RGR_Z1 {
         Scanner in = new Scanner(System.in);
         return in.nextInt();
     }
-    public static void Menu(){
+
+    public static void Menu() {
         System.out.println("Меню \n 1-Найти количество нечётных чисел. \n 2-Найти количество простых чисел."
                 + " \n 3-Найти количество чисел-полиндромов. \n 4-Выйти. \n");
     }
-    
+
     public static void Count(List<Integer> spisoc, int vid_sortirovki) {
         long rezult;
         if (spisoc == null) {
@@ -48,7 +49,7 @@ public class RGR_Z1 {
             switch (vid_sortirovki) {
                 case 1:
                     rezult = spisoc.stream().filter(s -> s % 2 != 0).count();
-                    System.out.println("По вашему запросу найдено "+rezult+" совпадения. \n");
+                    System.out.println("По вашему запросу найдено " + rezult + " совпадения. \n");
                     break;
                 case 2:
                     rezult = spisoc.stream().filter((Integer s) -> {
@@ -62,12 +63,12 @@ public class RGR_Z1 {
                         }
                         return isPrime;
                     }).count();
-                    System.out.println("По вашему запросу найдено "+rezult+" совпадения. \n");
+                    System.out.println("По вашему запросу найдено " + rezult + " совпадения. \n");
                     break;
                 case 3:
                     rezult = spisoc.stream().filter(s -> Integer.toString(s)
                             .equals(new StringBuilder().append(s).reverse().toString())).count();
-                    System.out.println("По вашему запросу найдено "+rezult+" совпадения. \n");
+                    System.out.println("По вашему запросу найдено " + rezult + " совпадения. \n");
                     break;
                 case 4:
                     System.exit(0);

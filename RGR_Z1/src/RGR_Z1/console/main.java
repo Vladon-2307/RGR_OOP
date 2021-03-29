@@ -6,11 +6,13 @@
 package RGR_Z1.console;
 
 import RGR_Z1.data.RGR_Z1;
+
 /**
  *
  * @author vlado
  */
 public class main {
+
     public static void main(String[] args) {
         while (true) {            
             RGR_Z1.Menu();
