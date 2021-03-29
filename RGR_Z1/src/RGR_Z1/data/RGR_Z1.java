@@ -37,7 +37,7 @@ public class RGR_Z1 {
     }
     public static void Menu(){
         System.out.println("Меню \n 1-Найти количество нечётных чисел. \n 2-Найти количество простых чисел."
-                + " \n 3-Найти количество чисел-полиндромов. \n");
+                + " \n 3-Найти количество чисел-полиндромов. \n 4-Выйти. \n");
     }
     
     public static void Count(List<Integer> spisoc, int vid_sortirovki) {
@@ -65,10 +65,12 @@ public class RGR_Z1 {
                     System.out.println("По вашему запросу найдено "+rezult+" совпадения. \n");
                     break;
                 case 3:
-                    rezult = spisoc.stream().filter(s -> {
-                return Integer.toString(s).equals(new StringBuilder().append(s).reverse().toString());
-            }).count();
+                    rezult = spisoc.stream().filter(s -> Integer.toString(s)
+                            .equals(new StringBuilder().append(s).reverse().toString())).count();
                     System.out.println("По вашему запросу найдено "+rezult+" совпадения. \n");
+                    break;
+                case 4:
+                    System.exit(0);
                     break;
                 default:
                     System.err.println("Таково менью нет выберите другое:");

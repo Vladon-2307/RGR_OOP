@@ -12,7 +12,10 @@ import RGR_Z1.data.RGR_Z1;
  */
 public class main {
     public static void main(String[] args) {
-        RGR_Z1.Menu();
-        RGR_Z1.Count(RGR_Z1.Spisoc(), RGR_Z1.Scaner());
+        while (true) {            
+            RGR_Z1.Menu();
+            RGR_Z1.Count(RGR_Z1.Spisoc(), RGR_Z1.Scaner());
+        }
+        
     }
 }
