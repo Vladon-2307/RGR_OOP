@@ -16,13 +16,31 @@ public class Main implements Runnable {
 
     Bank_account bank = new Bank_account();
 
+    public Bank_account getBank() {
+        return bank;
+    }
+
     public static void main(String[] args) {
-        
-        Main m =new Main();
-        
-        new Thread(m, "User1").start();
-        new Thread(m, "User2").start();
-        new Thread(m, "User3").start();
+
+        Main m = new Main();
+
+        Thread t1 = new Thread(m, "User1");
+        Thread t2 = new Thread(m, "User2");
+        Thread t3 = new Thread(m, "User3");
+
+        t1.start();
+        t2.start();
+        t3.start();
+
+        try {
+            t1.join();
+            t2.join();
+            t3.join();
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
+
+        System.out.println("Bank: " + m.getBank().getBalans());
 
     }
 
@@ -41,7 +59,6 @@ public class Main implements Runnable {
                 }
             } else {
                 System.out.println(Thread.currentThread().getName() + ": " + summa);
-                System.out.println("Bank: "+bank.getBalans());
                 break;
             }
         }

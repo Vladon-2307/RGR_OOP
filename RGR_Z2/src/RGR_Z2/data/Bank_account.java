@@ -18,10 +18,10 @@ public class Bank_account {
     }
 
     synchronized public boolean withdrawal(int WithSumm) {
-        if(balans>10 && WithSumm<50 && WithSumm>10 && balans > WithSumm){
+        if (balans > 10 && WithSumm < 50 && WithSumm > 10 && balans > WithSumm) {
             balans -= WithSumm;
             return true;
-        }else{
+        } else {
             return false;
         }
     }
