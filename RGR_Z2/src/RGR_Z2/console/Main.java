@@ -14,7 +14,7 @@ import java.util.Random;
  */
 public class Main implements Runnable {
 
-    Bank_account bank = new Bank_account();
+    private Bank_account bank = new Bank_account();
 
     public Bank_account getBank() {
         return bank;
