@@ -6,61 +6,54 @@
 package RGR_Z2.console;
 
 import RGR_Z2.data.Bank_account;
+import RGR_Z2.data.User;
 import java.util.Random;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 /**
  *
  * @author vlado
  */
-public class Main implements Runnable {
-
-    private Bank_account bank = new Bank_account();
-
-    public Bank_account getBank() {
-        return bank;
-    }
+public class Main {
 
     public static void main(String[] args) {
 
-        Main m = new Main();
+        Bank_account bank = new Bank_account();
 
-        Thread t1 = new Thread(m, "User1");
-        Thread t2 = new Thread(m, "User2");
-        Thread t3 = new Thread(m, "User3");
-
-        t1.start();
-        t2.start();
-        t3.start();
-
-        try {
-            t1.join();
-            t2.join();
-            t3.join();
-        } catch (InterruptedException ex) {
-            ex.printStackTrace();
+        //Получить ExecutorService из служебного класса Executors
+        //размер пула потоков равен 3
+        ExecutorService executor = Executors.newFixedThreadPool(3);
+        //создать список для хранения объекта Future, связанного с Callable
+        List<Future> list = new ArrayList<>();
+        //Create User instance
+        Callable users = new User(bank);
+        for (int i = 0; i < 3; i++) {
+            Future future = executor.submit(users);
+            //добавив Future в список, мы можем получить возвращаемое значение
+            list.add(future);
         }
-
-        System.out.println("Bank: " + m.getBank().getBalans());
-
-    }
-
-    @Override
-    public void run() {
-        int summa = 0;
-        while (true) {
-            if (bank.getBalans() > 10) {
-                int snatie = new Random().nextInt(40) + 10;
-                if (bank.withdrawal(snatie)) {
-                    summa += snatie;
-                }
-                try {
-                    Thread.sleep(10);
-                } catch (InterruptedException ex) {
-                }
-            } else {
-                System.out.println(Thread.currentThread().getName() + ": " + summa);
-                break;
+        for (Future fut : list) {
+            try {
+// выводим возвращаемое значение Future, замечаем задержку вывода в консоли
+// потому что Future.get() ожидает завершения задачи
+                System.out.println(new Date() + "::" + fut.get());
+            } catch (InterruptedException | ExecutionException e) {
+                e.printStackTrace();
             }
         }
+        //закрыть службу
+        executor.shutdown();
+
+        System.out.println("Bank: " + bank.getBalans());
+
     }
+
 }
