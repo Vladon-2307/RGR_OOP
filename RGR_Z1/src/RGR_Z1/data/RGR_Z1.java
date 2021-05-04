@@ -41,12 +41,12 @@ public class RGR_Z1 {
                 + " \n 3-Найти количество чисел-полиндромов. \n 4-Выйти. \n");
     }
 
-    public static void Count(List<Integer> spisoc, int vid_sortirovki) {
+    public static void Count(List<Integer> spisoc, int namber_menu) {
         long rezult;
         if (spisoc == null) {
             System.err.println("Список пуст.");
         } else {
-            switch (vid_sortirovki) {
+            switch (namber_menu) {
                 case 1:
                     rezult = spisoc.stream().filter(s -> s % 2 != 0).count();
                     System.out.println("По вашему запросу найдено " + rezult + " совпадения. \n");
