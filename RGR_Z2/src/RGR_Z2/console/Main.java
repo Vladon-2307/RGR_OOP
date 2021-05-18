@@ -7,7 +7,6 @@ package RGR_Z2.console;
 
 import RGR_Z2.data.Bank_account;
 import RGR_Z2.data.User;
-import java.util.Random;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -27,7 +26,6 @@ public class Main {
     public static void main(String[] args) {
 
         Bank_account bank = new Bank_account();
-
         //Получить ExecutorService из служебного класса Executors
         //размер пула потоков равен 3
         ExecutorService executor = Executors.newFixedThreadPool(3);
@@ -51,9 +49,6 @@ public class Main {
         }
         //закрыть службу
         executor.shutdown();
-
         System.out.println("Bank: " + bank.getBalans());
-
     }
-
 }
